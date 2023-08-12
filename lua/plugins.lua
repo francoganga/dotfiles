@@ -1,0 +1,271 @@
+local execute = vim.api.nvim_command
+local fn = vim.fn
+
+
+local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+
+if fn.empty(fn.glob(install_path)) > 0 then
+    execute('!git clone https://github.com/wbthomason/packer.nvim '..install_path)
+    execute 'packadd packer.nvim'
+end
+
+
+return require('packer').startup(function(use)
+end)
+
+-- return require('packer').startup(function(use)
+--     -- Packer can manage itself
+--     use 'wbthomason/packer.nvim'
+--     -- use 'chriskempson/base16-vim'
+--     use { 'neovim/nvim-lspconfig', config = function() require'lsp-config' end }
+--     use { "williamboman/mason.nvim" }
+--     use { "williamboman/mason-lspconfig.nvim" }
+--     -- use {
+--     --     'nvim-treesitter/nvim-treesitter',
+--     --     config = function() require("nvim-treesitter.configs").setup {
+--     --         -- indent = {
+--     --         --     enable = false
+--     --         -- },
+--     --         ensure_installed = "all",
+--     --         sync_install = false,
+--     --         highlight = {
+--     --             -- `false` will disable the whole extension
+--     --             enable = true,
+--     --             -- list of language that will be disabled
+--     --             disable = { "elixir", "php", "vue", "html.twig.js.cshtml.twig.js.css", "markwdown", "python" },
+--     --             -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+--     --             -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+--     --             -- Using this option may slow down your editor, and you may see some duplicate highlights.
+--     --             -- Instead of true it can also be a list of languages
+--     --             additional_vim_regex_highlighting = false,
+--     --         },
+--     --     } end
+--     -- }
+--     use {
+--         'terrortylor/nvim-comment', config = function() require'nvim_comment'.setup {
+--             -- Linters prefer comment and line to have a space in between markers
+--             marker_padding = true,
+--             -- should comment out empty or whitespace only lines
+--             comment_empty = true,
+--             -- Should key mappings be created
+--             create_mappings = true,
+--             -- Normal mode mapping left hand side
+--             line_mapping = "gcc",
+--             -- Visual/Operator mapping left hand side
+--             operator_mapping = "gc",
+--             -- Hook function to call before commenting takes place
+--             hook = nil
+--         } end
+--     }
+--     --use {
+--     --    'kyazdani42/nvim-tree.lua', config = function() require'nvim-tree'.setup(require'nvim-tree-config') end
+--     --}
+--     use 'nvim-telescope/telescope.nvim'
+--
+--     use 'hrsh7th/nvim-cmp'
+--     use 'hrsh7th/cmp-nvim-lsp'
+--     use 'hrsh7th/cmp-buffer'
+--     use 'hrsh7th/cmp-path'
+--     use 'hrsh7th/cmp-cmdline'
+--
+--     use 'L3MON4D3/LuaSnip'
+--
+--     use 'saadparwaiz1/cmp_luasnip'
+--
+--     -- use {
+--     --     "windwp/nvim-autopairs",
+--     --     config = function() require("nvim-autopairs").setup {} end
+--     -- }
+--
+--     use {
+--         'lewis6991/gitsigns.nvim',
+--         requires = {
+--             'nvim-lua/plenary.nvim'
+--         }
+--     }
+--     -- use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
+--
+--     -- use 'tjdevries/colorbuddy.vim'
+--     --
+--     -- use {
+--     --     'tjdevries/gruvbuddy.nvim', config = function() require('colorbuddy').colorscheme('gruvbuddy') end
+--     -- }
+--     use {
+--         'kyazdani42/nvim-web-devicons', config = function() require'nvim-web-devicons'.setup {
+--             override = {
+--                 zsh = {
+--                     icon = "",
+--                     color = "#428850",
+--                     cterm_color = "65",
+--                     name = "Zsh"
+--                 }
+--             };
+--             -- globally enable default icons (default to false)
+--             -- will get overriden by `get_icons` option
+--             default = true;
+--         } end
+--     }
+--     use 'tpope/vim-fugitive'
+--     -- use 'justinmk/vim-dirvish'
+--     use 'tamago324/nlsp-settings.nvim'
+--     use 'onsails/lspkind-nvim'
+--
+--     use 'mattn/emmet-vim'
+--     -- use 'rust-lang/rust.vim'
+--     use 'jose-elias-alvarez/null-ls.nvim'
+--     use 'mtth/scratch.vim'
+--     -- use {
+--     --     'nvim-treesitter/nvim-treesitter-textobjects',
+--     --     config = function() require'nvim-treesitter.configs'.setup {
+--     --         textobjects = {
+--     --             select = {
+--     --                 enable = true,
+--     --
+--     --                 -- Automatically jump forward to textobj, similar to targets.vim
+--     --                 lookahead = true,
+--     --
+--     --                 keymaps = {
+--     --                     -- You can use the capture groups defined in textobjects.scm
+--     --                     ["af"] = "@function.outer",
+--     --                     ["if"] = "@function.inner",
+--     --                     ["ac"] = "@class.outer",
+--     --                     ["ic"] = "@class.inner",
+--     --                 },
+--     --             },
+--     --         },
+--     --     } end
+--     -- }
+--
+--     use 'godlygeek/tabular'
+--
+--     use 'elixir-editors/vim-elixir'
+--     use 'dyng/ctrlsf.vim'
+--     use 'posva/vim-vue'
+--     use 'ThePrimeagen/harpoon'
+--     use 'hrsh7th/cmp-nvim-lsp-signature-help'
+--     use 'nelsyeung/twig.vim'
+--     use 'mfussenegger/nvim-dap'
+--     use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"}, config = function ()
+--         require("dapui").setup()
+--     end }
+--     use 'theHamsta/nvim-dap-virtual-text'
+--     -- use 'unblevable/quick-scope'
+--     use {'ful1e5/onedark.nvim', config = function ()
+--         require'onedark'.setup()
+--     end}
+--
+--     -- use {
+--     --     'windwp/nvim-ts-autotag',
+--     --     config = function ()
+--     --         local filetypes = {
+--     --             'html', 'javascript', 'typescript', 'javascriptreact', 'typescriptreact', 'svelte', 'vue', 'tsx', 'jsx', 'rescript',
+--     --             'xml',
+--     --             'php',
+--     --             'markdown',
+--     --             'glimmer',
+--     --             'handlebars',
+--     --             'hbs',
+--     --             'heex',
+--     --         }
+--     --         require('nvim-ts-autotag').setup({
+--     --             filetypes = filetypes
+--     --         })
+--     --     end
+--     -- }
+--     use 'folke/tokyonight.nvim'
+--     use 'simrat39/symbols-outline.nvim'
+--     use {
+--         'windwp/nvim-projectconfig',
+--         config = function ()
+--             require('nvim-projectconfig').setup()
+--         end
+--     }
+--     use {
+--         'tamago324/lir.nvim',
+--         requires = { "nvim-lua/plenary.nvim" }
+--     }
+--     use { 'tamago324/lir-git-status.nvim', config = function ()
+--             require'lir.git_status'.setup({
+--                 show_ignored = false
+--             })
+--         end
+--     }
+--     -- use {
+--     --     "nvim-neorg/neorg",
+--     --     config = function()
+--     --         require('neorg').setup {
+--     --             load = {
+--     --                 ["core.norg.journal"] = {
+--     --                     config = {
+--     --                         workspace = "home"
+--     --                     }
+--     --                 },
+--     --                 ["core.norg.dirman"] = {
+--     --                     config = {
+--     --                         workspaces = {
+--     --                             work = "~/notes/work",
+--     --                             home = "~/notes/home",
+--     --                         }
+--     --                     }
+--     --                 }
+--     --             }
+--     --         }
+--     --     end,
+--     --     requires = "nvim-lua/plenary.nvim"
+--     -- }
+--
+--     use {
+--         'kazhala/close-buffers.nvim',
+--         config = function ()
+--             require('close_buffers').setup({
+--                 filetype_ignore = {},  -- Filetype to ignore when running deletions
+--                 file_glob_ignore = {},  -- File name glob pattern to ignore when running deletions (e.g. '*.md')
+--                 file_regex_ignore = {}, -- File name regex pattern to ignore when running deletions (e.g. '.*[.]md')
+--                 preserve_window_layout = { 'this', 'nameless' },  -- Types of deletion that should preserve the window layout
+--                 next_buffer_cmd = nil,  -- Custom function to retrieve the next buffer when preserving window layout
+--             })
+--         end
+--     }
+--
+--     -- use {
+--     --     'nvim-treesitter/playground',
+--     --     config = function ()
+--     --         require "nvim-treesitter.configs".setup {
+--     --             playground = {
+--     --                 enable = true,
+--     --                 disable = {},
+--     --                 updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
+--     --                 persist_queries = false, -- Whether the query persists across vim sessions
+--     --                 keybindings = {
+--     --                     toggle_query_editor = 'o',
+--     --                     toggle_hl_groups = 'i',
+--     --                     toggle_injected_languages = 't',
+--     --                     toggle_anonymous_nodes = 'a',
+--     --                     toggle_language_display = 'I',
+--     --                     focus_language = 'f',
+--     --                     unfocus_language = 'F',
+--     --                     update = 'R',
+--     --                     goto_node = '<cr>',
+--     --                     show_help = '?',
+--     --                 },
+--     --             }
+--     --         }
+--     --     end
+--     -- }
+--
+--     -- use "/home/fganga/projects/personal/go_test.nvim"
+--
+--     use {
+--         'leoluz/nvim-dap-go',
+--         config = function ()
+--             require('dap-go').setup()
+--         end
+--     }
+--
+--     -- use 'lbrayner/vim-rzip'
+--
+--     use 'ntpeters/vim-better-whitespace'
+--
+--
+-- end)
+
