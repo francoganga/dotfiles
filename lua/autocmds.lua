@@ -17,30 +17,45 @@
 --     pattern = "*.ts",
 --     command = "setlocal shiftwidth=2 tabstop=2"
 -- })
-vim.api.nvim_create_autocmd("BufRead", {
-    pattern = "*.gohtml",
-    command = "set filetype=gohtmltmpl"
-})
 
-
-local augroup = vim.api.nvim_create_augroup("goimports", {})
+local au_goimports = vim.api.nvim_create_augroup("goimports", {})
 
 vim.api.nvim_create_autocmd("BufWritePre", {
     pattern = "*.go",
-    group = augroup,
+    group = au_goimports,
     callback = function()
         require("go_tests").goimports()
     end
 })
 
-local termgo = vim.api.nvim_create_augroup("termgo", {})
-vim.api.nvim_create_autocmd("BufRead", {
-    pattern = "*.go",
-    group = augroup,
-    callback = function()
-        vim.api.nvim_set_keymap('n', ',t', ':vs term://zsh<cr>', { noremap = true, silent = true })
-    end
-})
+-- local au_djlint = vim.api.nvim_create_augroup("au_djlint", {})
+--
+-- vim.api.nvim_create_autocmd("BufWritePre", {
+--     pattern = "*.gohtml",
+--     group = au_djlint,
+--     callback = function()
+--         require("go_tests").djlint()
+--     end
+-- })
+
+-- local termgo = vim.api.nvim_create_augroup("termgo", {})
+-- vim.api.nvim_create_autocmd("BufRead", {
+--     pattern = "*.go",
+--     group = augroup,
+--     callback = function()
+--         vim.api.nvim_set_keymap('n', ',t', ':vs term://zsh<cr>', { noremap = true, silent = true })
+--     end
+-- })
+
+-- local prettier_svelte = vim.api.nvim_create_augroup("prettier_svelte", {})
+--
+-- vim.api.nvim_create_autocmd("BufRead", {
+--     pattern = "*.svelte",
+--     group = augroup,
+--     callback = function()
+--         require("go_tests").prettier_svelte()
+--     end
+-- })
 
 vim.api.nvim_create_autocmd("BufRead", {
     pattern = "*.templ",

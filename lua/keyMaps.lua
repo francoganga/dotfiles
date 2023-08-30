@@ -106,3 +106,4 @@ vim.api.nvim_set_keymap('t', '<C-x>', '<C-\\><C-n>', { noremap = true, silent = 
 vim.api.nvim_set_keymap('n', '<ESC>', ':noh<CR><ESC>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>k', ':cnext<cr>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>j', ':cprev<cr>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', ',t', ':vs term://zsh<cr>', { noremap = true, silent = true })
