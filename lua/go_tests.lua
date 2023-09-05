@@ -4,6 +4,8 @@ local conf = require("telescope.config").values
 local actions = require "telescope.actions"
 local action_state = require "telescope.actions.state"
 
+local lsp_utils = R('lspconfig/util')
+
 local uv = vim.loop
 
 local M = {}
@@ -94,7 +96,7 @@ M.goimports = function()
     local cid = vim.fn.jobstart({"goimports"}, {
         stdout_buffered = true,
         on_stdout = function (_, data)
-            if data ~= "" then
+            if #data > 1 then
                 vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, data)
             end
         end
@@ -117,10 +119,15 @@ M.prettier_svelte = function()
 
     --cat src/App.svelte | npx prettier --stdin-filepath App.svelte --plugin prettier-plugin-svelte --config .prettierrc
     local cwd = vim.fn.expand("%:p:h")
+    P(cwd)
 
     local config_file_location = cwd .. ".prettierrc"
 
-    local cid = vim.fn.jobstart({"npx", "prettier", "--stdin-filepath", "file.svelte", "--plugin",  "prettier-plugin-svelte"}, {
+    root_dir = lsp_utils.root_pattern("package.json")
+    print("res")
+    P(root_dir("."))
+
+    local cid = vim.fn.jobstart({"/home/fganga/projects/sistemas/portal2/front/node_modules/.bin/prettier", "--stdin-filepath", "file.svelte", "--plugin",  "prettier-plugin-svelte"}, {
         stdout_buffered = true,
         on_stdout = function (_, data)
             P(data)
