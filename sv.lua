@@ -61,6 +61,7 @@ vim.api.nvim_set_keymap('i', 'kj',  '<Esc>', { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap('n', 'mm',  'mM', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>m',  '`M', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'K',  '<NOP>', { noremap = true, silent = true })
 
 
 vim.cmd([[
