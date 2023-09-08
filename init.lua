@@ -30,18 +30,14 @@ vim.opt.shiftwidth=4
 vim.opt.smarttab = true
 vim.opt.relativenumber = true
 vim.opt.number = true
-vim.opt.cursorline = true
-vim.opt.cursorcolumn = true
 vim.opt.lazyredraw = true
 vim.opt.autowrite = true
 vim.opt.autoread = true
-vim.opt.clipboard = "unnamedplus"
 vim.opt.undofile = true
 vim.opt.undodir = "/tmp"
 vim.opt.mouse = ""
 vim.opt.splitbelow = true
 vim.opt.splitright = true
-vim.opt.cursorcolumn = true
 -- vim.opt.list = true
 
 vim.g.codeium_disable_bindings = 1
@@ -120,7 +116,7 @@ endfunction()
 autocmd TabNewEntered * call OnTabEnter(expand("<amatch>"))
 ]])
 
-vim.cmd("colorscheme base16-ayu-dark")
+vim.cmd("colorscheme base16-gruvbox-dark-hard")
 vim.cmd([[
 highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
 highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
