@@ -121,23 +121,39 @@ M.prettier_svelte = function()
     local cwd = vim.fn.expand("%:p:h")
     P(cwd)
 
-    local config_file_location = cwd .. ".prettierrc"
 
-    root_dir = lsp_utils.root_pattern("package.json")
-    print("res")
-    P(root_dir("."))
+    local package_json_path = lsp_utils.find_package_json_ancestor(cwd)
 
-    local cid = vim.fn.jobstart({"/home/fganga/projects/sistemas/portal2/front/node_modules/.bin/prettier", "--stdin-filepath", "file.svelte", "--plugin",  "prettier-plugin-svelte"}, {
+    if package_json_path == nil then
+        print("Error: No package.json found")
+        return
+    end
+
+    local config_file_location = package_json_path .. "/.prettierrc.js"
+
+    local cmd = {
+        "bun",
+        "x",
+        "prettier",
+        "--stdin-filepath",
+        "file.svelte",
+        "--plugin",
+        "prettier-plugin-svelte",
+        "--config",
+        config_file_location
+    }
+
+    local cid = vim.fn.jobstart(cmd, {
         stdout_buffered = true,
         on_stdout = function (_, data)
-            P(data)
-
             if #data > 1 then
                 vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, data)
             end
         end,
         on_stderr = function (_, err)
-            P(err)
+            if #err > 1 then
+                P(err)
+            end
         end
     })
 
@@ -165,7 +181,9 @@ M.djlint = function()
             end
         end,
         on_stderr = function (_, err)
-            P(err)
+            if #err > 1 then
+                P(err)
+            end
         end
     })
 
