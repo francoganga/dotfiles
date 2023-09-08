@@ -47,11 +47,14 @@ M.fuzzy_dirs= function (opts)
 
                 --FILTER git?
                 for i, dir in ipairs(d) do
-                    if dir == "." then
-                    else if string.find(dir, "git") == nil then
+                    if dir ~= "." then
                         table.insert(filtered, dir)
                     end
                 end
+
+                table.filter(filtered, function(e)
+                    return string.find(e, "git") == nil
+                end)
 
                 table.filter(filtered, function(e)
                     return string.find(e, "node") == nil
@@ -64,7 +67,6 @@ M.fuzzy_dirs= function (opts)
                 table.filter(filtered, function(e)
                     return string.find(e, "var") == nil
                 end)
-            end
 
 
             pickers.new(opts, {
