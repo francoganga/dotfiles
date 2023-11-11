@@ -116,7 +116,7 @@ endfunction()
 autocmd TabNewEntered * call OnTabEnter(expand("<amatch>"))
 ]])
 
-vim.cmd("colorscheme base16-gruvbox-dark-hard")
+vim.cmd("colorscheme base16-tokyo-night-terminal-storm")
 vim.cmd([[
 highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
 highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline

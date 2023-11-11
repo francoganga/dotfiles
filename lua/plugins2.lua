@@ -16,7 +16,11 @@ require("lazy").setup({
   "williamboman/mason-lspconfig.nvim",
   { "nvim-telescope/telescope.nvim", config = function()
 
-      require'telescope'.setup()
+      require'telescope'.setup({
+          defaults = {
+              preview = false
+          }
+      })
 
   end
 
@@ -96,7 +100,7 @@ require("lazy").setup({
 
       end
   },
-  "unblevable/quick-scope",
+  --"unblevable/quick-scope",
   "ThePrimeagen/harpoon",
   { "catppuccin/nvim", name = "catppuccin" },
   "mfussenegger/nvim-dap",

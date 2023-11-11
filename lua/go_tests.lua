@@ -39,7 +39,7 @@ M.fuzzy_dirs= function (opts)
         "git",
         "node",
         "vendor",
-        "var"
+        "var",
     }
 
     -- vim.fn.jobstart({"find", ".", "-type", "d", "|", "grep", "-vE", "git"}, {
@@ -65,7 +65,7 @@ M.fuzzy_dirs= function (opts)
                 end
 
                 pickers.new(opts, {
-                    prompt_title = "colors",
+                    prompt_title = "Directories",
                     finder = finders.new_table {
                         results = filtered
                     },
@@ -139,6 +139,7 @@ M.prettier_svelte = function()
         "--config",
         config_file_location
     }
+    P(cmd)
 
     local cid = vim.fn.jobstart(cmd, {
         stdout_buffered = true,

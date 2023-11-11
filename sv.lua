@@ -13,7 +13,22 @@ vim.opt.rtp:prepend(lazypath)
 local plugins = {
     "tamago324/lir.nvim",
     "nvim-lua/plenary.nvim",
-    'kyazdani42/nvim-web-devicons'
+    'kyazdani42/nvim-web-devicons',
+    {
+        "ibhagwan/fzf-lua",
+        -- optional for icon support
+        config = function()
+            -- calling `setup` is optional for customization
+            require("fzf-lua").setup({
+                winopts = {
+                    split = "belowright new",
+                    preview = {
+                        hidden = "hidden"
+                    }
+                }
+            })
+        end
+    }
 }
 
 
@@ -37,7 +52,6 @@ vim.opt.number = true
 vim.opt.lazyredraw = true
 vim.opt.autowrite = true
 vim.opt.autoread = true
-vim.opt.clipboard = "unnamedplus"
 vim.opt.undofile = true
 vim.opt.undodir = "/tmp"
 vim.opt.mouse = ""
@@ -62,6 +76,13 @@ vim.api.nvim_set_keymap('i', 'kj',  '<Esc>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'mm',  'mM', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>m',  '`M', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'K',  '<NOP>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>f', "<cmd>lua require'fzf-lua'.files()<CR>", { noremap = true, silent = true })
+
+vim.api.nvim_set_keymap('n', '<leader>h', "<C-w>h", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>j', "<C-w>j", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>k', "<C-w>k", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>l', "<C-w>l", { noremap = true, silent = true })
+
 
 
 vim.cmd([[
@@ -82,3 +103,26 @@ vim.cmd([[
 ]])
 
 vim.cmd("colorscheme slate")
+
+local au_center = vim.api.nvim_create_augroup("au_center", {})
+
+vim.api.nvim_create_autocmd("CursorMoved", {
+    group = au_center,
+    callback = function()
+        local lines = vim.fn.line("$")
+
+        local cur_pos = vim.fn.getcurpos()
+
+        if #cur_pos < 2 then
+            print("cursor position length less than 2, cannot continue")
+            return
+        end
+
+        local cur_line =cur_pos[2]
+        local diff = lines - cur_line
+
+        if lines - cur_line <= 10 then
+            vim.cmd("normal! zz")
+        end
+    end
+})

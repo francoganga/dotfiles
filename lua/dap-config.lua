@@ -32,7 +32,7 @@ dap.adapters.delve = {
 dap.adapters.coreclr = {
     type = 'executable',
     command = '/usr/bin/netcoredbg',
-    args = {'--interpreter=vscode'}
+    args = {'--interpreter=cli'}
 }
 
 
@@ -53,13 +53,27 @@ dap.configurations.cs = {
 --   args = {os.getenv('HOME') .. '/misc/clones/vscode-go/dist/debugAdapter.js'};
 -- }
 --
--- dap.configurations.go = {
---   {
---     type = 'go';
---     name = 'Debug';
---     request = 'launch';
---     showLog = false;
---     program = "${file}";
---     dlvToolPath = vim.fn.exepath('dlv')  -- Adjust to where delve is installed
---   },
--- }
+
+dap.configurations.go = {
+  {
+    type = "delve",
+    name = "Debug",
+    request = "launch",
+    program = "${file}"
+  },
+  {
+    type = "delve",
+    name = "Debug test", -- configuration for debugging test files
+    request = "launch",
+    mode = "test",
+    program = "${file}"
+  },
+  -- works with go.mod packages and sub packages 
+  {
+    type = "delve",
+    name = "Debug test (go.mod)",
+    request = "launch",
+    mode = "test",
+    program = "./${relativeFileDirname}"
+  } 
+}

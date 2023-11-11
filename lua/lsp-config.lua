@@ -100,7 +100,7 @@ nvim_lsp.rust_analyzer.setup({
 -- })
 
 nvim_lsp.emmet_ls.setup{
-    filetypes = {"html", "eruby", "twig", "templ", "htmldjango", "svelte"}
+    filetypes = {"html", "eruby", "twig", "templ", "htmldjango", "svelte", "vue"}
 }
 
 nvim_lsp.gopls.setup{

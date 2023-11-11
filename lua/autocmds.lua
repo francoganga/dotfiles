@@ -28,6 +28,29 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     end
 })
 
+-- local au_center = vim.api.nvim_create_augroup("au_center", {})
+--
+-- vim.api.nvim_create_autocmd("CursorMoved", {
+--     group = au_center,
+--     callback = function()
+--         local lines = vim.fn.line("$")
+--
+--         local cur_pos = vim.fn.getcurpos()
+--
+--         if #cur_pos < 2 then
+--             print("cursor position length less than 2, cannot continue")
+--             return
+--         end
+--
+--         local cur_line =cur_pos[2]
+--         local diff = lines - cur_line
+--
+--         if lines - cur_line <= 10 then
+--             vim.cmd("normal! zz")
+--         end
+--     end
+-- })
+
 -- local au_djlint = vim.api.nvim_create_augroup("au_djlint", {})
 --
 -- vim.api.nvim_create_autocmd("BufWritePre", {
