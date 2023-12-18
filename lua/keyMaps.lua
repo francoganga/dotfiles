@@ -8,10 +8,15 @@ vim.api.nvim_set_keymap('n', ',o', ':only<cr>:tabonly<cr>', { noremap = true, si
 vim.api.nvim_set_keymap('n', ',O', ':lua require("utils").close_all()<CR>', { noremap = true, silent = true })
 
 
-vim.api.nvim_set_keymap('n', '<C-h>', '<C-w>h', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-j>', '<C-w>j', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-k>', '<C-w>k', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<C-h>', '<C-w>h', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<C-j>', '<C-w>j', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<C-k>', '<C-w>k', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', { noremap = true, silent = true })
+
+vim.api.nvim_set_keymap('n', '<C-k>', ':resize -5<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-j>', ':resize +5<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-h>', ':vertical resize -5<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-l>', ':vertical resize +5<CR>', { noremap = true, silent = true })
 
 
 vim.api.nvim_set_keymap('i', 'jk',  '<Esc>', { noremap = true, silent = true })
@@ -25,11 +30,9 @@ vim.api.nvim_set_keymap('n', '<leader>m',  '`M', { noremap = true, silent = true
 vim.api.nvim_set_keymap('n', '\\v',  '`[v`]', { noremap = true, silent = true })
 
 
-vim.api.nvim_set_keymap('n', '<leader>ff', '<cmd>Telescope git_files<cr>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>fg', '<cmd>Telescope live_grep<cr>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>fb', '<cmd>Telescope buffers<cr>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>fh', '<cmd>Telescope help_tags<cr>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>f', '<cmd>lua vim.lsp.buf.format({ async = true })<cr>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>f', "<cmd>lua require'fzf-lua'.files()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', ',b', "<cmd>lua require'fzf-lua'.buffers()<CR>", { noremap = true, silent = true })
+
 
 vim.api.nvim_set_keymap('n', ',v', ':tabnew $HOME/.config/nvim/init.lua<cr>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', ',g', ':G<cr>:only<cr>', { noremap = true, silent = true })
@@ -106,4 +109,4 @@ vim.api.nvim_set_keymap('t', '<C-x>', '<C-\\><C-n>', { noremap = true, silent = 
 vim.api.nvim_set_keymap('n', '<ESC>', ':noh<CR><ESC>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', ',n', ':cnext<cr>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', ',p', ':cprev<cr>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', ',t', ':sp term://zsh<cr>:resize 10<cr>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', ',t', ':vs<cr>', { noremap = true, silent = true })

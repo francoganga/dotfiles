@@ -27,7 +27,7 @@ cmp.setup({
         ['<C-p>'] = cmp.mapping.select_prev_item()
     },
     sources = cmp.config.sources({
-        { name = 'nvim_lsp', max_item_count = 5, keyword_length = 3 },
+        { name = 'nvim_lsp', max_item_count = 5 },
         { name = 'luasnip' },
         { name = 'buffer', keyword_length = 5, max_item_count = 5 },
         { name = 'path' },

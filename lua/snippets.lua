@@ -174,7 +174,7 @@ ls.add_snippets("typescript", {
 
 ls.add_snippets("go", {
     s("p", fmt('fmt.Println("{}")', {i(1)})),
-    s("pf", fmt('fmt.Printf("{}=%v\\n", {})', {i(1), i(2)})),
+    s("pf", fmt('fmt.Printf("{}=%v\\n", {})', {i(1), extras.rep(1)})),
     s("e", fmt([[
     if err != nil {{
         {}

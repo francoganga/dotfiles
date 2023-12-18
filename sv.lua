@@ -57,6 +57,7 @@ vim.opt.undodir = "/tmp"
 vim.opt.mouse = ""
 vim.opt.splitbelow = true
 vim.opt.splitright = true
+vim.opt.clipboard = "unnamedplus"
 
 
 vim.g.mapleader = ' '
@@ -103,26 +104,3 @@ vim.cmd([[
 ]])
 
 vim.cmd("colorscheme slate")
-
-local au_center = vim.api.nvim_create_augroup("au_center", {})
-
-vim.api.nvim_create_autocmd("CursorMoved", {
-    group = au_center,
-    callback = function()
-        local lines = vim.fn.line("$")
-
-        local cur_pos = vim.fn.getcurpos()
-
-        if #cur_pos < 2 then
-            print("cursor position length less than 2, cannot continue")
-            return
-        end
-
-        local cur_line =cur_pos[2]
-        local diff = lines - cur_line
-
-        if lines - cur_line <= 10 then
-            vim.cmd("normal! zz")
-        end
-    end
-})

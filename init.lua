@@ -38,10 +38,11 @@ vim.opt.undodir = "/tmp"
 vim.opt.mouse = ""
 vim.opt.splitbelow = true
 vim.opt.splitright = true
+vim.opt.clipboard = "unnamedplus"
 -- vim.opt.list = true
 
 vim.g.codeium_disable_bindings = 1
--- vim.g.codeium_manual = true
+vim.g.codeium_manual = true
 
 -- vim.g.dashboard_default_executive = 'telescope'
 -- vim.opt.formatoptions = vim.opt.formatoptions - {"c", "r", "o"}
@@ -116,7 +117,7 @@ endfunction()
 autocmd TabNewEntered * call OnTabEnter(expand("<amatch>"))
 ]])
 
-vim.cmd("colorscheme base16-tokyo-night-terminal-storm")
+vim.cmd("colorscheme base16-dracula")
 vim.cmd([[
 highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
 highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline

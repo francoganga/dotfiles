@@ -14,16 +14,20 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
   "williamboman/mason.nvim",
   "williamboman/mason-lspconfig.nvim",
-  { "nvim-telescope/telescope.nvim", config = function()
-
-      require'telescope'.setup({
-          defaults = {
-              preview = false
-          }
-      })
-
-  end
-
+  {
+      "ibhagwan/fzf-lua",
+      -- optional for icon support
+      config = function()
+          -- calling `setup` is optional for customization
+          require("fzf-lua").setup({
+              winopts = {
+                  split = "belowright new",
+                  -- preview = {
+                  --     hidden = "hidden"
+                  -- }
+              }
+          })
+      end
   },
   "hrsh7th/nvim-cmp",
   "hrsh7th/cmp-nvim-lsp",
@@ -190,6 +194,6 @@ require("lazy").setup({
                 desc = "Toggle Flash Search",
             },
         },
-    }
+    },
 })
 

@@ -80,17 +80,17 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 --     end
 -- })
 
-vim.api.nvim_create_autocmd("BufRead", {
-    pattern = "*.templ",
-    callback = function()
-        vim.lsp.start({
-            name="templ",
-            cmd = {"templ", "lsp"},
-            filetypes = {"templ"},
-            root_dir = vim.fs.dirname(vim.fs.find({'go.mod', '.git'}, { upward = true })[1]),
-        })
-    end
-})
+-- vim.api.nvim_create_autocmd("BufRead", {
+--     pattern = "*.templ",
+--     callback = function()
+--         vim.lsp.start({
+--             name="templ",
+--             cmd = {"templ", "lsp"},
+--             filetypes = {"templ"},
+--             root_dir = vim.fs.dirname(vim.fs.find({'go.mod', '.git'}, { upward = true })[1]),
+--         })
+--     end
+-- })
 
 vim.api.nvim_create_autocmd("LspAttach", {
     pattern = "*.templ",
