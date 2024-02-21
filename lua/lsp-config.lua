@@ -100,7 +100,7 @@ nvim_lsp.rust_analyzer.setup({
 -- })
 
 nvim_lsp.emmet_ls.setup{
-    filetypes = {"html", "eruby", "twig", "templ", "htmldjango", "svelte", "vue"}
+    filetypes = {"html", "eruby", "twig", "templ", "htmldjango", "svelte", "vue", "heex"}
 }
 
 nvim_lsp.gopls.setup{
@@ -141,9 +141,10 @@ nvim_lsp.volar.setup {
     cmd = {"vue-language-server", "--stdio"}
 }
 
--- nvim_lsp.elixirls.setup {
---     cmd = { "/home/fganga/.local/share/nvim/lsp_servers/elixir/elixir-ls/language_server.sh" };
--- }
+nvim_lsp.elixirls.setup {
+    cmd = { "/home/fganga/.local/share/nvim/mason/packages/elixir-ls/language_server.sh" },
+    on_attach = on_attach,
+}
 
 local border = {
       {"🭽", "FloatBorder"},
@@ -163,14 +164,14 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
 vim.cmd [[autocmd! ColorScheme * highlight NormalFloat guibg=#1f2335]]
 vim.cmd [[autocmd! ColorScheme * highlight FloatBorder guifg=white guibg=#1f2335]]
 
-nvim_lsp.tailwindcss.setup({
-    filetypes = {
-        "templ",
-        "html"
-    }
+nvim_lsp.tailwindcss.setup({})
+nvim_lsp.ols.setup({
+    cmd = {"/home/fganga/misc/clones/ols/ols"},
+    on_attach = on_attach,
+    root_dir = nvim_lsp.util.root_pattern("*.odin", ".git"),
 })
 
-local servers = {"intelephense", "pylsp", "tsserver", "elmls", "rust_analyzer", "clangd", "csharp_ls", "jsonls", "rescriptls", "elixirls", "ocamllsp", "svelte", "jsonls"}
+local servers = {"intelephense", "pylsp", "tsserver", "elmls", "rust_analyzer", "clangd", "csharp_ls", "jsonls", "rescriptls", "ocamllsp", "svelte", "jsonls"}
 
 for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {

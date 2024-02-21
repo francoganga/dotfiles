@@ -14,21 +14,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
   "williamboman/mason.nvim",
   "williamboman/mason-lspconfig.nvim",
-  {
-      "ibhagwan/fzf-lua",
-      -- optional for icon support
-      config = function()
-          -- calling `setup` is optional for customization
-          require("fzf-lua").setup({
-              winopts = {
-                  split = "belowright new",
-                  -- preview = {
-                  --     hidden = "hidden"
-                  -- }
-              }
-          })
-      end
-  },
+  'nvim-telescope/telescope.nvim',
   "hrsh7th/nvim-cmp",
   "hrsh7th/cmp-nvim-lsp",
   "hrsh7th/cmp-buffer",
@@ -93,7 +79,7 @@ require("lazy").setup({
               -- `false` will disable the whole extension
               enable = true,
               -- list of language that will be disabled
-              disable = { "elixir", "php", "vue", "html.twig.js.cshtml.twig.js.css", "markwdown", "python", "ocaml" },
+              disable = {"php", "vue", "html.twig.js.cshtml.twig.js.css", "markwdown", "python", "ocaml" },
               -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
               -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
               -- Using this option may slow down your editor, and you may see some duplicate highlights.
@@ -147,6 +133,7 @@ require("lazy").setup({
     end
 
     },
+    "mbbill/undotree",
     "joerdav/templ.vim",
     {
         "folke/flash.nvim",

@@ -30,7 +30,8 @@ vim.api.nvim_set_keymap('n', '<leader>m',  '`M', { noremap = true, silent = true
 vim.api.nvim_set_keymap('n', '\\v',  '`[v`]', { noremap = true, silent = true })
 
 
-vim.api.nvim_set_keymap('n', '<leader>f', "<cmd>lua require'fzf-lua'.files()<CR>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<leader>f', "<cmd>lua require'fzf-lua'.files()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>f', "<cmd>Telescope find_files<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', ',b', "<cmd>lua require'fzf-lua'.buffers()<CR>", { noremap = true, silent = true })
 
 
@@ -52,8 +53,9 @@ vim.api.nvim_set_keymap('', 'Q', '<NOP>', {silent = true})
 vim.api.nvim_set_keymap('n', '<leader>t', '<cmd>lua require("harpoon.term").gotoTerminal(1)<cr>', { noremap = true, silent = true })
 
 
-vim.api.nvim_set_keymap('n', ',f', ':set foldmethod=marker foldmarker={,}<cr>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>s', ':ScratchPreview<cr>', { noremap = true })
+vim.api.nvim_set_keymap('n', ',fo', ':set foldmethod=marker foldmarker={,}<cr>', { noremap = true })
+vim.api.nvim_set_keymap('n', ',f', '<cmd>lua vim.lsp.buf.format()<cr>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>s', ':setlocal buftype=nofile bufhidden=hide<cr>', { noremap = true })
 -- dap
 vim.api.nvim_set_keymap('n', '<leader>b', '<cmd>lua require("dap").toggle_breakpoint()<cr>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>dc', '<cmd>lua require("dap").continue()<cr>', { noremap = true })
@@ -105,7 +107,7 @@ vim.api.nvim_set_keymap('n', '<c-Down>', ':resize +1<CR>', { noremap = true, sil
 vim.api.nvim_set_keymap('n', '<c-left>', ':vertical resize -1<CR>', { noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<c-right>', ':vertical resize +1<CR>', { noremap = true, silent = true})
 
-vim.api.nvim_set_keymap('t', '<C-x>', '<C-\\><C-n>', { noremap = true, silent = true})
+vim.api.nvim_set_keymap('t', '<esc><esc>', '<C-\\><C-n>', { noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<ESC>', ':noh<CR><ESC>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', ',n', ':cnext<cr>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', ',p', ':cprev<cr>', { noremap = true, silent = true })
