@@ -9,7 +9,6 @@ local f = ls.function_node
 local c = ls.choice_node
 local d = ls.dynamic_node
 local r = ls.restore_node
-local events = require("luasnip.util.events")
 local ai = require("luasnip.nodes.absolute_indexer")
 local fmt = require("luasnip.extras.fmt").fmt
 local partial = extras.partial
@@ -174,7 +173,7 @@ ls.add_snippets("typescript", {
 
 ls.add_snippets("go", {
     s("p", fmt('fmt.Println("{}")', {i(1)})),
-    s("pf", fmt('fmt.Printf("{}=%v\\n", {})', {i(1), extras.rep(1)})),
+    s("pf", fmt('fmt.Printf("{}=%#v\\n", {})', {i(1), extras.rep(1)})),
     s("e", fmt([[
     if err != nil {{
         {}
@@ -183,4 +182,13 @@ ls.add_snippets("go", {
     s("append", fmt([[
     {} = append({}, {})
     ]], {i(1),extras.rep(1), i(2)}))
+})
+
+ls.add_snippets("svelte", {
+    s("cl", fmt("console.log({})", {i(1)}))
+})
+
+
+ls.add_snippets("rescript", {
+    s("s", fmt("{{{}->React.string}}", {i(1)}))
 })

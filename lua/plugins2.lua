@@ -14,7 +14,16 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
   "williamboman/mason.nvim",
   "williamboman/mason-lspconfig.nvim",
-  'nvim-telescope/telescope.nvim',
+  {'nvim-telescope/telescope.nvim', config = function()
+      require'telescope'.setup({
+          pickers = {
+              colorscheme = {
+                  enable_preview = true
+              }
+          }
+      })
+
+  end },
   "hrsh7th/nvim-cmp",
   "hrsh7th/cmp-nvim-lsp",
   "hrsh7th/cmp-buffer",
@@ -50,22 +59,6 @@ require("lazy").setup({
   },
   "kazhala/close-buffers.nvim",
   "lewis6991/gitsigns.nvim",
-  { "nvim-neorg/neorg", config = function()
-      require('neorg').setup {
-          load = {
-              ["core.defaults"] = { },
-              ["core.dirman"] = {
-                  config = {
-                      workspaces = {
-                          work = "~/notes/work",
-                          home = "~/notes/home",
-                      }
-                  }
-              }
-          }
-      }
-      end
-  },
   "nvim-treesitter/playground",
   { "nvim-treesitter/nvim-treesitter", config = function()
 
@@ -96,7 +89,7 @@ require("lazy").setup({
   "mfussenegger/nvim-dap",
   {"rcarriga/nvim-dap-ui", config = function()
       require("dapui").setup()
-  end
+  end, dependencies = {"nvim-neotest/nvim-nio"}
   },
   "theHamsta/nvim-dap-virtual-text",
   "leoluz/nvim-dap-go",
@@ -118,7 +111,7 @@ require("lazy").setup({
   {"nvim-treesitter/nvim-treesitter-context", config = function()
         require'treesitter-context'.setup{
             enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
-            max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
+            max_lines = 4, -- How many lines the window should span. Values <= 0 mean no limit.
             min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
             line_numbers = true,
             multiline_threshold = 20, -- Maximum number of lines to collapse for a single context line
@@ -182,5 +175,63 @@ require("lazy").setup({
             },
         },
     },
+    "folke/zen-mode.nvim",
+    'tpope/vim-dadbod',
+    'kristijanhusak/vim-dadbod-ui',
+    'kristijanhusak/vim-dadbod-completion',
+    {
+        "vhyrro/luarocks.nvim",
+        priority = 1000,
+        config = true,
+    },
+    {
+        "nvim-neorg/neorg",
+        dependencies = { "luarocks.nvim" },
+        lazy = false, -- Disable lazy loading as some `lazy.nvim` distributions set `lazy = true` by default
+        version = "*", -- Pin Neorg to the latest stable release
+        config = function()
+            require("neorg").setup {
+                load = {
+                    ["core.keybinds"] = {},
+                    ["core.defaults"] = {},
+                    ["core.concealer"] = {},
+                    ["core.dirman"] = {
+                        config = {
+                            workspaces = {
+                                notes = "~/notes",
+                            },
+                            default_workspace = "notes",
+                        },
+                    },
+                },
+            }
+
+            vim.wo.foldlevel = 99
+            vim.wo.conceallevel = 2
+        end
+    },
+    "echasnovski/mini.align",
+    {
+        "zk-org/zk-nvim",
+        config = function()
+            require("zk").setup({
+                -- See Setup section below
+            })
+        end
+    },
+    'rescript-lang/vim-rescript',
+    {
+        "NeogitOrg/neogit",
+        dependencies = {
+            "nvim-lua/plenary.nvim",         -- required
+            "sindrets/diffview.nvim",        -- optional - Diff integration
+
+            -- Only one of these is needed.
+            "nvim-telescope/telescope.nvim", -- optional
+            "ibhagwan/fzf-lua",              -- optional
+            "echasnovski/mini.pick",         -- optional
+        },
+        config = true
+    }
 })
 

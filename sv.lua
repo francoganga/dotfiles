@@ -28,7 +28,11 @@ local plugins = {
                 }
             })
         end
-    }
+    },
+    "echasnovski/mini.align",
+    "Tetralux/odin.vim",
+    "mattn/emmet-vim",
+    "cohama/lexima.vim"
 }
 
 
@@ -37,7 +41,7 @@ require('lir-config')
 
 
 vim.opt.swapfile = false
-vim.opt.wrap = false
+vim.opt.wrap = true
 vim.opt.hidden = true
 vim.opt.termguicolors = true
 vim.opt.tabstop=4
@@ -58,6 +62,7 @@ vim.opt.mouse = ""
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.clipboard = "unnamedplus"
+vim.opt.scrolloff = 10
 
 
 vim.g.mapleader = ' '
@@ -69,8 +74,9 @@ vim.api.nvim_set_keymap('n', 'G', 'Gzz', { noremap = true })
 vim.api.nvim_set_keymap('n', '<C-s>', ':w<cr>', { noremap = true})
 vim.api.nvim_set_keymap('', 'Q', '<NOP>', {silent = true})
 vim.api.nvim_set_keymap('n', ',o', ':only<cr>:tabonly<cr>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', ',O', ':%bd!|e#|bd#<cr>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', ',l', ':e %:h<cr>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('t', '<C-x>', '<C-\\><C-n>', { noremap = true, silent = true})
+vim.api.nvim_set_keymap('t', '<ESC><ESC>', '<C-\\><C-n>', { noremap = true, silent = true})
 vim.api.nvim_set_keymap('i', 'jk',  '<Esc>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('i', 'kj',  '<Esc>', { noremap = true, silent = true })
 
@@ -83,6 +89,15 @@ vim.api.nvim_set_keymap('n', '<leader>h', "<C-w>h", { noremap = true, silent = t
 vim.api.nvim_set_keymap('n', '<leader>j', "<C-w>j", { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>k', "<C-w>k", { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>l', "<C-w>l", { noremap = true, silent = true })
+
+vim.api.nvim_set_keymap('n', '<C-k>', ':resize -5<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-j>', ':resize +5<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-h>', ':vertical resize -5<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-l>', ':vertical resize +5<CR>', { noremap = true, silent = true })
+
+vim.api.nvim_set_keymap('v', '<', '<gv', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '>', '>gv', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '\'', '`', { noremap = true, silent = true })
 
 
 
@@ -103,4 +118,6 @@ vim.cmd([[
     cnoreabbrev Vs vs
 ]])
 
-vim.cmd("colorscheme slate")
+
+
+vim.cmd("colorscheme pablo")

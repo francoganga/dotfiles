@@ -20,7 +20,7 @@ require('mason-config')
 ---- CONFIG
 
 vim.opt.swapfile = false
-vim.opt.wrap = false
+vim.opt.wrap = true
 vim.opt.hidden = true
 vim.opt.termguicolors = true
 vim.opt.tabstop=4
@@ -39,6 +39,9 @@ vim.opt.mouse = ""
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.clipboard = "unnamedplus"
+vim.opt.scrolloff = 10
+vim.opt.mouse = "n"
+vim.opt.conceallevel = 0
 -- vim.opt.list = true
 
 vim.g.codeium_disable_bindings = 1
@@ -47,25 +50,26 @@ vim.g.codeium_manual = true
 -- vim.g.dashboard_default_executive = 'telescope'
 -- vim.opt.formatoptions = vim.opt.formatoptions - {"c", "r", "o"}
 
--- vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
---     vim.lsp.diagnostic.on_publish_diagnostics, {
---         -- disable virtual text
---         virtual_text = false,
---
---         -- show signs
---         signs = true,
---
---         -- delay update diagnostics
---         update_in_insert = false,
---         -- display_diagnostic_autocmds = { "InsertLeave" },
---
---     }
--- )
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+    vim.lsp.diagnostic.on_publish_diagnostics, {
+        -- disable virtual text
+        virtual_text = false,
+
+        -- show signs
+        signs = true,
+
+        -- delay update diagnostics
+        update_in_insert = false,
+        -- display_diagnostic_autocmds = { "InsertLeave" },
+
+    }
+)
 
 
 vim.cmd([[
     cnoreabbrev W! w!
     cnoreabbrev Q! q!
+    cnoreabbrev Qa! qa!
     cnoreabbrev Qall! qall!
     cnoreabbrev Wq wq
     cnoreabbrev Wa wa
@@ -117,7 +121,8 @@ endfunction()
 autocmd TabNewEntered * call OnTabEnter(expand("<amatch>"))
 ]])
 
-vim.cmd("colorscheme base16-dracula")
+vim.cmd("colorscheme base16-tokyo-city-terminal-dark")
+
 vim.cmd([[
 highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
 highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline

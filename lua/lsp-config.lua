@@ -100,7 +100,7 @@ nvim_lsp.rust_analyzer.setup({
 -- })
 
 nvim_lsp.emmet_ls.setup{
-    filetypes = {"html", "eruby", "twig", "templ", "htmldjango", "svelte", "vue", "heex"}
+    filetypes = {"html", "eruby", "twig", "templ", "htmldjango", "svelte", "vue", "heex", "typescriptreact"}
 }
 
 nvim_lsp.gopls.setup{
@@ -171,7 +171,7 @@ nvim_lsp.ols.setup({
     root_dir = nvim_lsp.util.root_pattern("*.odin", ".git"),
 })
 
-local servers = {"intelephense", "pylsp", "tsserver", "elmls", "rust_analyzer", "clangd", "csharp_ls", "jsonls", "rescriptls", "ocamllsp", "svelte", "jsonls"}
+local servers = {"intelephense", "pylsp", "tsserver", "elmls", "rust_analyzer", "clangd", "csharp_ls", "jsonls", "ocamllsp", "svelte", "jsonls"}
 
 for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
