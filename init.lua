@@ -12,7 +12,7 @@ require("nvim-dap-virtual-text").setup()
 require('dap-config')
 require('globals')
 --require('symbols-config')
-require('lir-config')
+--require('lir-config')
 require('mason-config')
 
 
@@ -40,7 +40,6 @@ vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.clipboard = "unnamedplus"
 vim.opt.scrolloff = 10
-vim.opt.mouse = "n"
 vim.opt.conceallevel = 0
 -- vim.opt.list = true
 
@@ -64,6 +63,8 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 
     }
 )
+
+vim.diagnostic.config({virtual_lines = true})
 
 
 vim.cmd([[
@@ -94,16 +95,16 @@ highlight link LirGitStatusIgnored Comment
 ]])
 
 
-local treesitter_parser_config = require "nvim-treesitter.parsers".get_parser_configs()
-treesitter_parser_config.templ = {
-  install_info = {
-    url = "https://github.com/vrischmann/tree-sitter-templ.git",
-    files = {"src/parser.c", "src/scanner.c"},
-    branch = "master",
-  },
-}
-
-vim.treesitter.language.register('templ', 'templ')
+-- local treesitter_parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+-- treesitter_parser_config.templ = {
+--   install_info = {
+--     url = "https://github.com/vrischmann/tree-sitter-templ.git",
+--     files = {"src/parser.c", "src/scanner.c"},
+--     branch = "master",
+--   },
+-- }
+--
+-- vim.treesitter.language.register('templ', 'templ')
 
 
 
@@ -121,7 +122,7 @@ endfunction()
 autocmd TabNewEntered * call OnTabEnter(expand("<amatch>"))
 ]])
 
-vim.cmd("colorscheme base16-tokyo-city-terminal-dark")
+vim.cmd("colorscheme catppuccin-mocha")
 
 vim.cmd([[
 highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline

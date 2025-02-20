@@ -32,7 +32,9 @@ local plugins = {
     "echasnovski/mini.align",
     "Tetralux/odin.vim",
     "mattn/emmet-vim",
-    "cohama/lexima.vim"
+    --"cohama/lexima.vim",
+    { "EdenEast/nightfox.nvim" },
+    'rescript-lang/vim-rescript',
 }
 
 
@@ -99,6 +101,33 @@ vim.api.nvim_set_keymap('v', '<', '<gv', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', '>', '>gv', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '\'', '`', { noremap = true, silent = true })
 
+vim.api.nvim_create_autocmd('TermOpen', {
+    group = vim.api.nvim_create_augroup('custom_terminal', { clear = true }),
+    callback = function()
+        vim.opt.number = false
+        vim.opt.relativenumber = false
+    end
+})
+
+vim.keymap.set('n', '<space>st', function()
+    vim.cmd.vnew()
+    vim.cmd.term()
+    vim.cmd.wincmd("J")
+    vim.api.nvim_win_set_height(0, 15)
+    vim.api.nvim_buf_set_mark(0, "A", 1, 0, {})
+end)
+
+
+vim.cmd([[set errorformat+=%f(%l:%c)\ %m]])
+
+local odin_make = vim.api.nvim_create_augroup("odin_make", {})
+
+vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
+    pattern = "*.odin",
+    group = odin_make,
+    command = "setlocal makeprg=odin\\ run\\ ."
+})
+
 
 
 vim.cmd([[
@@ -120,4 +149,4 @@ vim.cmd([[
 
 
 
-vim.cmd("colorscheme pablo")
+vim.cmd("colorscheme carbonfox")

@@ -28,10 +28,6 @@ local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 local on_attach = function(client, bufnr)
 
-    -- if client.name == "tsserver" then
-    --     client.resolved_capabilities.document_formatting = false
-    -- end
-
     if client.supports_method("textDocument/formatting") then
         vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
         -- vim.api.nvim_create_autocmd("BufWritePre", {
@@ -114,24 +110,6 @@ nvim_lsp.gopls.setup{
     -- }
 }
 
--- nvim_lsp.tsserver.setup {
---     on_attach = on_attach,
---     filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx", "vue" }
--- }
-
-local function get_typescript_server_path(root_dir)
-  local project_root = lsp_utils.find_node_modules_ancestor(root_dir)
-
-  local local_tsserverlib = project_root ~= nil and lsp_utils.path.join(project_root, 'node_modules', 'typescript', 'lib', 'tsserverlibrary.js')
-  local global_tsserverlib = '/home/fganga/.nvm/versions/node/v18.13.0/lib/node_modules/typescript/lib/tsserverlibrary.js'
-
-  if local_tsserverlib and lsp_utils.path.exists(local_tsserverlib) then
-    return local_tsserverlib
-  else
-    return global_tsserverlib
-  end
-end
-
 nvim_lsp.volar.setup {
     -- on_new_config = function(new_config, new_root_dir)
     --     new_config.init_options.typescript.serverPath = get_typescript_server_path(new_root_dir)
@@ -171,7 +149,7 @@ nvim_lsp.ols.setup({
     root_dir = nvim_lsp.util.root_pattern("*.odin", ".git"),
 })
 
-local servers = {"intelephense", "pylsp", "tsserver", "elmls", "rust_analyzer", "clangd", "csharp_ls", "jsonls", "ocamllsp", "svelte", "jsonls"}
+local servers = {"intelephense", "pylsp", "ts_ls", "clangd", "svelte", "jsonls"}
 
 for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {

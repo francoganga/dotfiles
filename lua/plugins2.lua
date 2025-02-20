@@ -32,12 +32,46 @@ require("lazy").setup({
   "L3MON4D3/LuaSnip",
   "tpope/vim-fugitive",
   "mattn/emmet-vim",
-  "tamago324/lir.nvim",
-  { "tamago324/lir-git-status.nvim", config = function()
-      require'lir.git_status'.setup()
-  end },
+  {
+      'stevearc/oil.nvim',
+      ---@module 'oil'
+      ---@type oil.SetupOpts
+      opts = {},
+      -- Optional dependencies
+      dependencies = { { "echasnovski/mini.icons", opts = {} } },
+      -- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
+      config = function()
+
+          require("oil").setup({
+              keymaps = {
+                  ["g?"] = "actions.show_help",
+                  ["l"] = "actions.select",
+                  ["<C-s>"] = { "actions.select", opts = { vertical = true }, desc = "Open the entry in a vertical split" },
+                  ["<C-h>"] = { "actions.select", opts = { horizontal = true }, desc = "Open the entry in a horizontal split" },
+                  ["<C-t>"] = { "actions.select", opts = { tab = true }, desc = "Open the entry in new tab" },
+                  ["<C-p>"] = "actions.preview",
+                  ["<C-c>"] = "actions.close",
+                  ["<C-l>"] = "actions.refresh",
+                  ["h"] = "actions.parent",
+                  ["_"] = "actions.open_cwd",
+                  ["`"] = "actions.cd",
+                  ["~"] = { "actions.cd", opts = { scope = "tab" }, desc = ":tcd to the current oil directory", mode = "n" },
+                  ["gs"] = "actions.change_sort",
+                  ["gx"] = "actions.open_external",
+                  ["g."] = "actions.toggle_hidden",
+                  ["g\\"] = "actions.toggle_trash",
+              },
+
+          })
+
+      end
+  },
+  -- "tamago324/lir.nvim",
+  -- { "tamago324/lir-git-status.nvim", config = function()
+  --     require'lir.git_status'.setup()
+  -- end },
   "nvim-lua/plenary.nvim",
-  "kyazdani42/nvim-web-devicons",
+  --"kyazdani42/nvim-web-devicons",
   "tamago324/nlsp-settings.nvim",
   "hrsh7th/cmp-nvim-lsp-signature-help",
   "onsails/lspkind-nvim",
@@ -59,30 +93,30 @@ require("lazy").setup({
   },
   "kazhala/close-buffers.nvim",
   "lewis6991/gitsigns.nvim",
-  "nvim-treesitter/playground",
-  { "nvim-treesitter/nvim-treesitter", config = function()
+  --"nvim-treesitter/playground",
+  --{ "nvim-treesitter/nvim-treesitter", config = function()
 
-      require("nvim-treesitter.configs").setup {
-          -- indent = {
-          --     enable = false
-          -- },
-          ensure_installed = "all",
-          sync_install = false,
-          highlight = {
-              -- `false` will disable the whole extension
-              enable = true,
-              -- list of language that will be disabled
-              disable = {"php", "vue", "html.twig.js.cshtml.twig.js.css", "markwdown", "python", "ocaml" },
-              -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-              -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-              -- Using this option may slow down your editor, and you may see some duplicate highlights.
-              -- Instead of true it can also be a list of languages
-              additional_vim_regex_highlighting = false,
-          },
-      }
+  --    require("nvim-treesitter.configs").setup {
+  --        -- indent = {
+  --        --     enable = false
+  --        -- },
+  --        ensure_installed = "all",
+  --        sync_install = false,
+  --        highlight = {
+  --            -- `false` will disable the whole extension
+  --            enable = true,
+  --            -- list of language that will be disabled
+  --            disable = {"php", "vue", "html.twig.js.cshtml.twig.js.css", "markwdown", "python", "ocaml" },
+  --            -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+  --            -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+  --            -- Using this option may slow down your editor, and you may see some duplicate highlights.
+  --            -- Instead of true it can also be a list of languages
+  --            additional_vim_regex_highlighting = false,
+  --        },
+  --    }
 
-      end
-  },
+  --    end
+  --},
   --"unblevable/quick-scope",
   "ThePrimeagen/harpoon",
   { "catppuccin/nvim", name = "catppuccin" },
@@ -107,74 +141,8 @@ require("lazy").setup({
           -- vim.keymap.set('i', '<c-x>', function() return vim.fn['codeium#Clear']() end, { expr = true })
       end
   },
-  "jose-elias-alvarez/null-ls.nvim",
-  {"nvim-treesitter/nvim-treesitter-context", config = function()
-        require'treesitter-context'.setup{
-            enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
-            max_lines = 4, -- How many lines the window should span. Values <= 0 mean no limit.
-            min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
-            line_numbers = true,
-            multiline_threshold = 20, -- Maximum number of lines to collapse for a single context line
-            trim_scope = 'outer', -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
-            mode = 'cursor',  -- Line used to calculate context. Choices: 'cursor', 'topline'
-            -- Separator between context and content. Should be a single character string, like '-'.
-            -- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
-            separator = nil,
-            zindex = 20, -- The Z-index of the context window
-            on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
-        }
-    end
-
-    },
-    "mbbill/undotree",
-    "joerdav/templ.vim",
-    {
-        "folke/flash.nvim",
-        event = "VeryLazy",
-        opts = {},
-        keys = {
-            {
-                "s",
-                mode = { "n", "x", "o" },
-                function()
-                    require("flash").jump()
-                end,
-                desc = "Flash",
-            },
-            {
-                "S",
-                mode = { "n", "o", "x" },
-                function()
-                    require("flash").treesitter()
-                end,
-                desc = "Flash Treesitter",
-            },
-            {
-                "r",
-                mode = "o",
-                function()
-                    require("flash").remote()
-                end,
-                desc = "Remote Flash",
-            },
-            {
-                "R",
-                mode = { "o", "x" },
-                function()
-                    require("flash").treesitter_search()
-                end,
-                desc = "Flash Treesitter Search",
-            },
-            {
-                "<c-s>",
-                mode = { "c" },
-                function()
-                    require("flash").toggle()
-                end,
-                desc = "Toggle Flash Search",
-            },
-        },
-    },
+  "mbbill/undotree",
+  "joerdav/templ.vim",
     "folke/zen-mode.nvim",
     'tpope/vim-dadbod',
     'kristijanhusak/vim-dadbod-ui',
@@ -183,32 +151,6 @@ require("lazy").setup({
         "vhyrro/luarocks.nvim",
         priority = 1000,
         config = true,
-    },
-    {
-        "nvim-neorg/neorg",
-        dependencies = { "luarocks.nvim" },
-        lazy = false, -- Disable lazy loading as some `lazy.nvim` distributions set `lazy = true` by default
-        version = "*", -- Pin Neorg to the latest stable release
-        config = function()
-            require("neorg").setup {
-                load = {
-                    ["core.keybinds"] = {},
-                    ["core.defaults"] = {},
-                    ["core.concealer"] = {},
-                    ["core.dirman"] = {
-                        config = {
-                            workspaces = {
-                                notes = "~/notes",
-                            },
-                            default_workspace = "notes",
-                        },
-                    },
-                },
-            }
-
-            vim.wo.foldlevel = 99
-            vim.wo.conceallevel = 2
-        end
     },
     "echasnovski/mini.align",
     {
@@ -228,8 +170,6 @@ require("lazy").setup({
 
             -- Only one of these is needed.
             "nvim-telescope/telescope.nvim", -- optional
-            "ibhagwan/fzf-lua",              -- optional
-            "echasnovski/mini.pick",         -- optional
         },
         config = true
     }

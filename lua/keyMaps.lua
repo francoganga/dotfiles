@@ -117,5 +117,28 @@ vim.api.nvim_set_keymap('n', ',p', ':cprev<cr>', { noremap = true, silent = true
 vim.api.nvim_set_keymap('n', ',t', ':vs<cr>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', ',z', ':ZenMode<cr>', { noremap = true, silent = true })
 
+vim.keymap.set('n', '<space>st', function()
+    local bufs = vim.fn.getbufinfo()
+    local terms = {}
 
+    for _, buf in ipairs(bufs) do
+
+        if string.sub(buf.name,1, 7) == "term://" then
+            table.insert(terms, buf.bufnr)
+        end
+    end
+
+
+    vim.cmd.vnew()
+
+    if #terms >= 1 then
+        -- TODO: clear terminals
+        vim.api.nvim_set_current_buf(terms[1])
+    else
+        vim.cmd.term()
+    end
+
+    vim.cmd.wincmd("J")
+    vim.api.nvim_win_set_height(0, 15)
+end)
 

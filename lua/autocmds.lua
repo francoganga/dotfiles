@@ -28,6 +28,14 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     end
 })
 
+vim.api.nvim_create_autocmd('TermOpen', {
+    group = vim.api.nvim_create_augroup('custom-term-open', { clear = true }),
+    callback = function()
+        vim.opt.number = false
+        vim.opt.relativenumber = false
+    end
+})
+
 -- local au_center = vim.api.nvim_create_augroup("au_center", {})
 --
 -- vim.api.nvim_create_autocmd("CursorMoved", {
